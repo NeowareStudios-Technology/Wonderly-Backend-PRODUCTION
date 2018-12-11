@@ -1,0 +1,320 @@
+{
+  "basePath": "/_ah/api",
+  "consumes": [
+    "application/json"
+  ],
+  "definitions": {
+    "ModelsEmailCheckResponse": {
+      "properties": {
+        "exists": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ModelsEmptyResponse": {
+      "properties": {
+        "nothing": {
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ModelsExperienceCodeResponse": {
+      "properties": {
+        "code": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ModelsOwnedCodesResponse": {
+      "properties": {
+        "codes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "dates": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "titles": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ModelsProfileInfoResponse": {
+      "properties": {
+        "createdExp": {
+          "format": "int64",
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "host": "wonderly-225214.appspot.com",
+  "info": {
+    "description": "wonderly API v1.",
+    "title": "wonderly",
+    "version": "v1"
+  },
+  "paths": {
+    "/wonderly/v1/exp": {
+      "put": {
+        "operationId": "wonderlyApi_SaveNewExperience",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "format": "int64",
+            "in": "query",
+            "name": "video",
+            "type": "string"
+          },
+          {
+            "format": "int64",
+            "in": "query",
+            "name": "model",
+            "type": "string"
+          },
+          {
+            "format": "int64",
+            "in": "query",
+            "name": "image",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "t1",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "t2",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "t3",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "t4",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "t5",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ModelsExperienceCodeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/wonderly/v1/exp/delete": {
+      "put": {
+        "operationId": "wonderlyApi_DeleteExperience",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "code",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ModelsEmptyResponse"
+            }
+          }
+        }
+      }
+    },
+    "/wonderly/v1/exp/edit": {
+      "put": {
+        "operationId": "wonderlyApi_EditExperience",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "format": "int64",
+            "in": "query",
+            "name": "video",
+            "type": "string"
+          },
+          {
+            "format": "int64",
+            "in": "query",
+            "name": "model",
+            "type": "string"
+          },
+          {
+            "format": "int64",
+            "in": "query",
+            "name": "image",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "code",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ModelsEmptyResponse"
+            }
+          }
+        }
+      }
+    },
+    "/wonderly/v1/profile": {
+      "get": {
+        "operationId": "wonderlyApi_GetProfileInfo",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ModelsProfileInfoResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "wonderlyApi_NewProfile",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "firstName",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "lastName",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ModelsEmptyResponse"
+            }
+          }
+        }
+      }
+    },
+    "/wonderly/v1/profile/check": {
+      "put": {
+        "operationId": "wonderlyApi_EmailCheck",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "email",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ModelsEmailCheckResponse"
+            }
+          }
+        }
+      }
+    },
+    "/wonderly/v1/profile/codes": {
+      "get": {
+        "operationId": "wonderlyApi_GetOwnedCodes",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ModelsOwnedCodesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/wonderly/v1/profile/edit": {
+      "put": {
+        "operationId": "wonderlyApi_EditProfile",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "firstName",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "lastName",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/ModelsEmptyResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "firebase": {
+      "authorizationUrl": "",
+      "flow": "implicit",
+      "type": "oauth2",
+      "x-google-issuer": "https://securetoken.google.com/wonderly-225214",
+      "x-google-jwks_uri": "https://www.googleapis.com/service_accounts/v1/metadata/x509/securetoken@system.gserviceaccount.com"
+    }
+  },
+  "swagger": "2.0"
+}
