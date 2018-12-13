@@ -110,6 +110,7 @@ class wonderlyApi(remote.Service):
       video = getattr(request, 'video'),
       model = getattr(request, 'model'),
       image = getattr(request, 'image'),
+      cover_image = getattr(request, 'coverImage')
     )
     #save new experience
     new_experience.put()
@@ -146,6 +147,7 @@ class wonderlyApi(remote.Service):
     experienceToEdit.video = getattr(request,"video")
     experienceToEdit.model = getattr(request,"model")
     experienceToEdit.image = getattr(request,"image")
+    experienceToEdit.cover_image = getattr(request, "coverImage")
     experienceToEdit.put()
   
     return EmptyResponse()
@@ -235,10 +237,11 @@ class wonderlyApi(remote.Service):
     #get all (up to 50) of the user's created experiences
     all_owned_experiences = Experience.query(ancestor=profile_key).fetch(50)
 
-    #declare lists  to keep track of dates, titles, and codes, and indexes (for sorting)
+    #declare tracker lists to keep track of dates, titles, codes, indexes, and cover images (for sorting)
     date_tracker_list = []
     title_tracker_list = []
     code_tracker_list = []
+    cover_image_tracker_list = []
     index_tracker = []
 
     #set tracker lists 
@@ -246,6 +249,8 @@ class wonderlyApi(remote.Service):
       code_tracker_list.append(experience.code)
       title_tracker_list.append(experience.title)
       date_tracker_list.append(experience.edit_date)
+      cover_image_tracker_list.append(experience.cover_image)
+
     
     #set index tracker to have as many elements as indexes e.g. [0, 1, 2, 3, 4, 5, 6, 7]
     for x in range(0,len(all_owned_experiences)):
@@ -259,23 +264,26 @@ class wonderlyApi(remote.Service):
     sorted_index_list = []
     sorted_date_list = []
     sorted_titles_list = []
+    sorted_cover_images_list = []
 
     #sort the index/date dictionary by date and save sorted values to sorted lists
     for key, value in sorted(date_sorter_dict.iteritems(), key=lambda (k,v): (v,k), reverse=True):
       sorted_index_list.append(key)
       sorted_date_list.append(value)
     
-    #use the index of the sorted index list to also sort codes and titles
+    #use the indices of the sorted index list to also sort codes, titles, and images
     for index in sorted_index_list:
-      sorted_codes_list.append(code_tracker_list[index])
+      sorted_codes_list.append(code_tracker_list[index]) 
       sorted_titles_list.append(title_tracker_list[index])
+      sorted_cover_images_list.append(cover_image_tracker_list[index])
 
-    #all codes, titles, and date "sorted lists" are now properly indexed to each other and sorted by most recent edit date of experience
+    #all codes, titles, date, and cover image "sorted lists" are now properly indexed to each other and sorted by most recent edit date of experience
 
     #create and set response
     response = OwnedCodesResponse()
     response.codes = sorted_codes_list
     response.titles = sorted_titles_list
+    response.coverImages = sorted_cover_images_list
     #convert datetime object to easier to read format
     for date in sorted_date_list:
       response.dates.append(date.strftime('%m-%d-%Y'))

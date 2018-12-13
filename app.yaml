@@ -56,7 +56,7 @@ env_variables:
   # 'gcloud endpoints services deploy swagger.json' command.
   ENDPOINTS_SERVICE_NAME: wonderly-225214.appspot.com
 
-  ENDPOINTS_SERVICE_VERSION: 2018-12-11r1
+  ENDPOINTS_SERVICE_VERSION: 2018-12-12r0
 
 
 

@@ -37,6 +37,12 @@
           },
           "type": "array"
         },
+        "coverImages": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "dates": {
           "items": {
             "type": "string"
@@ -129,6 +135,11 @@
             "in": "query",
             "name": "t5",
             "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "coverImage",
+            "type": "string"
           }
         ],
         "responses": {
@@ -191,6 +202,11 @@
           {
             "in": "query",
             "name": "code",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "coverImage",
             "type": "string"
           }
         ],

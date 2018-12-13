@@ -28,6 +28,7 @@ class OwnedCodesResponse(messages.Message):
     titles = messages.StringField(1,repeated=True)
     codes = messages.StringField(2,repeated=True)
     dates = messages.StringField(3, repeated=True)
+    coverImages = messages.StringField(4, repeated=True)
 
 class ProfileInfoResponse(messages.Message):
     firstName = messages.StringField(1)
@@ -76,7 +77,8 @@ SAVE_EXP_REQUEST = endpoints.ResourceContainer(
     t2=messages.BooleanField(6),
     t3=messages.BooleanField(7),
     t4=messages.BooleanField(8),
-    t5=messages.BooleanField(9)
+    t5=messages.BooleanField(9),
+    coverImage=messages.StringField(10)
 )
 
 DEL_EXP_REQUEST = endpoints.ResourceContainer(
@@ -90,7 +92,8 @@ EDIT_EXP_REQUEST = endpoints.ResourceContainer(
     video=messages.IntegerField(2),
     model=messages.IntegerField(3),
     image=messages.IntegerField(4),
-    code=messages.StringField(5)
+    code=messages.StringField(5),
+    coverImage=messages.StringField(6)
 )
 
 
@@ -112,6 +115,7 @@ class Experience(ndb.Model):
     video = ndb.IntegerProperty(required=True, default=False)
     model = ndb.IntegerProperty(required=True, default=False)
     image = ndb.IntegerProperty(required=True, default=False)
+    cover_image = ndb.StringProperty()
     
 class Profile(ndb.Model):
     '''Profile data model'''

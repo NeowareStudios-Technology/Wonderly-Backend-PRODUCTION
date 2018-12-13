@@ -24,6 +24,10 @@ definitions:
         items:
           type: string
         type: array
+      coverImages:
+        items:
+          type: string
+        type: array
       dates:
         items:
           type: string
@@ -87,6 +91,9 @@ paths:
         - in: query
           name: t5
           type: boolean
+        - in: query
+          name: coverImage
+          type: string
       responses:
         '200':
           description: A successful response
@@ -125,6 +132,9 @@ paths:
           type: string
         - in: query
           name: code
+          type: string
+        - in: query
+          name: coverImage
           type: string
       responses:
         '200':
